@@ -1,0 +1,13 @@
+# Datos de entrada/salida (no forman parte del codigo fuente)
+PRUEBA/
+POR_REVISAR/
+RESULTADO/
+
+# Datos generados en cada equipo
+codigos_cliente_confirmados.txt
+log_renombrador.json
+log_renombrador.csv
+
+# Python
+__pycache__/
+*.pyc

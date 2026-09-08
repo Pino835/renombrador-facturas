@@ -1,0 +1,90 @@
+===========================================================================
+RENOMBRADOR - Antes de usar este programa (leer una sola vez)
+===========================================================================
+
+Este programa lee los datos (codigo de cliente y numero de factura) de las
+facturas escaneadas en PDF y las renombra automaticamente. Antes de usarlo
+por primera vez en un equipo, revise esta lista.
+
+
+1. TENER LA CARPETA COMPLETA
+---------------------------------------------------------------------------
+No copie un solo archivo: copie TODA la carpeta "PROYECTO_RENOMBRADOR" en
+el Escritorio del equipo donde se va a usar. Debe contener estos 5 archivos
+(ademas de este LEEME):
+
+  - instalar_python.ps1
+  - instalar_dependencias.py
+  - renombrador.py
+  - ejecutar_1_instalar_dependencias.bat
+  - ejecutar_2_renombrador.bat
+
+Si falta alguno, el programa no va a funcionar.
+
+
+2. CONEXION A INTERNET (solo para el primer paso)
+---------------------------------------------------------------------------
+El primer paso (instalar dependencias) descarga Python y Tesseract-OCR si
+el equipo no los tiene, desde python.org y GitHub. Sin internet, ese paso
+falla. Una vez instalado todo, procesar facturas SI funciona sin internet.
+
+
+3. NO HACE FALTA SER ADMINISTRADOR DEL EQUIPO
+---------------------------------------------------------------------------
+Todo se instala "solo para este usuario" (no en Archivos de Programa), asi
+que un usuario normal, sin permisos de administrador, puede instalarlo y
+usarlo sin problema.
+
+
+4. ORDEN PARA EJECUTAR LOS ARCHIVOS
+---------------------------------------------------------------------------
+  Paso 1 (una sola vez, o cuando se quiera actualizar):
+      Doble clic en "ejecutar_1_instalar_dependencias.bat"
+
+  Paso 2 (cada vez que se quieran procesar facturas):
+      Doble clic en "ejecutar_2_renombrador.bat"
+
+
+5. IMPORTANTE: SI EL EQUIPO NO TENIA PYTHON INSTALADO
+---------------------------------------------------------------------------
+Si el Paso 1 instalo Python por primera vez en el equipo (no lo tenia),
+REINICIE EL EQUIPO UNA VEZ antes de usar el Paso 2. A veces Windows no
+"ve" un programa recien instalado hasta reiniciar o cerrar sesion.
+
+Si ya tenia Python instalado, no hace falta reiniciar.
+
+
+6. SI EL ANTIVIRUS O WINDOWS BLOQUEA ALGO
+---------------------------------------------------------------------------
+Como el Paso 1 descarga e instala programas (Python, Tesseract-OCR) de
+forma automatica, es posible que el antivirus de la empresa o Windows
+SmartScreen muestre una advertencia o bloquee la descarga la primera vez.
+
+Si eso pasa, avisar a IT para que autoricen "python.org" y "github.com" /
+"objects.githubusercontent.com", o que instalen Python y Tesseract-OCR
+manualmente esa vez (los enlaces oficiales quedan explicados dentro de
+"instalar_dependencias.py" si hace falta hacerlo a mano).
+
+
+7. CARPETA "PRUEBA" CON LAS FACTURAS ESCANEADAS
+---------------------------------------------------------------------------
+Las facturas escaneadas (en PDF) deben colocarse en:
+
+      Escritorio\PRUEBA
+
+Si esa carpeta no existe todavia, el programa la crea sola la primera vez
+que se ejecuta el Paso 2, y avisa que hay que poner los PDF ahi.
+
+
+8. DONDE QUEDAN LOS RESULTADOS
+---------------------------------------------------------------------------
+  - PDF ya renombrados:  Escritorio\RESULTADO\<fecha del dia>\
+  - Detalle de cada ejecucion (log):
+        Escritorio\PROYECTO_RENOMBRADOR\log_renombrador.csv
+        (se puede abrir con Excel)
+
+
+===========================================================================
+Si algo no funciona como se espera, anote el mensaje exacto que aparece en
+pantalla (o una foto) para poder revisarlo.
+===========================================================================

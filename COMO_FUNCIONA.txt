@@ -1,0 +1,85 @@
+===========================================================================
+RENOMBRADOR - Como funciona el programa
+===========================================================================
+
+1. QUE HACE EL PROGRAMA
+---------------------------------------------------------------------------
+El "Renombrador" automatiza el paso de "factura escaneada -> archivo
+renombrado" para cuentas por cobrar:
+
+  1. Revisa, uno por uno, los PDF escaneados en Escritorio\PRUEBA.
+  2. Le hace OCR a cada uno para encontrar el CODIGO DE CLIENTE y el
+     NUMERO DE FACTURA (formato CMER-XXXXXXX).
+  3. Si logra leer ambos datos con suficiente confianza, guarda una copia
+     renombrada ([codigo_cliente]-[factura].pdf) en:
+         Escritorio\RESULTADO\<fecha del dia>
+  4. Si no logra leerlos bien, abre una ventana con recortes de la
+     factura para que se digiten a mano, y el archivo tambien termina en
+     RESULTADO.
+  5. Registra cada resultado (automatico o manual) en un log.
+  6. Usa una lista de codigos de cliente ya confirmados para corregir
+     solo confusiones tipicas del OCR (como leer "O" en vez de "0"), sin
+     necesidad de que alguien lo revise cada vez.
+
+
+2. ARCHIVOS QUE NECESITA PARA FUNCIONAR
+---------------------------------------------------------------------------
+Todos viven en Escritorio\PROYECTO_RENOMBRADOR:
+
+  ejecutar_1_instalar_dependencias.bat
+      El que se abre con doble clic UNA SOLA VEZ (o al cambiar de equipo)
+      para instalar todo. Llama a "instalar_python.ps1".
+
+  instalar_python.ps1
+      Verifica si el equipo tiene Python; si no, lo instala
+      automaticamente (sin necesitar administrador). Al final, llama a
+      "instalar_dependencias.py".
+
+  instalar_dependencias.py
+      Instala/actualiza las librerias de Python necesarias (PyMuPDF,
+      pytesseract, Pillow), y el motor de OCR Tesseract junto con el
+      idioma Espanol, si no estan instalados.
+
+  requirements.txt
+      Lista de referencia de esas librerias (la usa
+      "instalar_dependencias.py").
+
+  ejecutar_2_renombrador.bat
+      El que se abre con doble clic CADA VEZ que se quieren procesar
+      facturas nuevas. Llama a "renombrador.py".
+
+  renombrador.py
+      El programa principal: hace todo el trabajo descrito en la seccion
+      1 (OCR, ventana de revision manual, guardar resultados, registrar
+      el log).
+
+  codigos_cliente_confirmados.txt
+      Lista de codigos de cliente ya confirmados como correctos (la
+      oficial que se cargo, mas los que se van agregando solos con cada
+      revision manual). Se usa para corregir errores de O/0 e I/1. Se
+      puede editar a mano con el Bloc de notas.
+
+  log_renombrador.json
+      El historial: un registro por cada archivo procesado, con fecha,
+      nombre original, nombre nuevo, cliente, factura, metodo
+      (automatico/manual), confianza y estado.
+
+  LEEME_PRIMERO.txt
+      Instrucciones para quien instale el programa por primera vez en un
+      equipo.
+
+  COMO_FUNCIONA.txt
+      Este archivo.
+
+
+3. CARPETAS QUE USA (en el Escritorio, no dentro de PROYECTO_RENOMBRADOR)
+---------------------------------------------------------------------------
+  PRUEBA
+      Ahi se colocan los PDF escaneados que hay que procesar.
+
+  POR_REVISAR
+      Carpeta temporal para los que necesitan revision manual -- se
+      vacia al confirmarlos.
+
+  RESULTADO\<fecha>
+      Destino final de los archivos ya renombrados, organizados por dia.
